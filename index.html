@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id ="root"></div>
+</body>
+<script src ='https://unpkg.com/react@17/umd/react.development.js'></script>
+    <script src ='https://unpkg.com/react-dom@17/umd/react-dom.development.js'></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = document.getElementById("root"); 
+        //화살표 함수를 통해서 변수를 함수로 전환
+        const Title = () => (
+            <h3
+            id="title" 
+            onMouseEnter={()=> console.log("mouse detected")}
+            >
+            Hello world
+            </h3>
+        );
+        const Button = () => (
+            <button 
+            style={{backgroundColor:"red",}} 
+            onClick={()=> console.log("im clicked")}
+            >
+            Click me
+            </button>
+            );
+        
+        //const container = React.createElement("div",null,[Title,Button])
+        //변수로 선언되었던 태그들 함수 전환후 container안에 위치 
+        const Container = 
+        <div>
+            <Title/> <Button/> 
+        </div>
+        // 함수, 무조건 첫글자 대문자 html 문자 소문자
+        ReactDOM.render(Container, root); 
+
+    </script>
+</html>
