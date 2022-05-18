@@ -14,22 +14,21 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         const root = document.getElementById("root");   
-        let counter = 0;
-        const countUp = () => { //3. count값이 바뀌고 다시 렌더링해 ui 업데이트됨
-            counter += 1;
-            render();
+        function App() {
+            let [counter, setCounter] = React.useState(0); 
+            const onClick = () => {
+                //counter += 1;
+                //how to rerendering: using setCounter
+                setCounter(counter+1); //리렌더링 자동으로 지원
+            }
+            return(
+                <div>
+                    <h3>Total Clicks:{counter}</h3>
+                    <button onClick={onClick}>Click me! </button> 
+                </div>
+            )
         }
-        const render = () => {
-            ReactDOM.render(<Container />, root); //2. count 값을 rerendering 해줌
-        }
-        const Container= () => 
-        <div>
-            <h3>Total Clicks:{counter}</h3>
-            <button onClick ={countUp}>Click me</button>
-            
-        </div>
-        //1. ui 를 업데이트 하기 위해서 render값을 counter 값이 바뀔 때마다 새로고침 시켜야함
-        ReactDOM.render(<Container />, root); 
+        ReactDOM.render(<App />, root); 
 
     </script>
 </html>
