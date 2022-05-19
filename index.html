@@ -17,7 +17,9 @@
         function App() {
             const [counter, setCounter] = React.useState(0); 
             const onClick = () => {
-                setCounter(counter+1);
+                // setCounter(counter+1);
+                setCounter((current) => current +1);
+                //이를 통해 현재 값을 불러와서 개발자로 하여금 혼동을 막는다.
             }
             return(
                 <div>
