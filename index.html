@@ -15,11 +15,9 @@
     <script type="text/babel">
         const root = document.getElementById("root");   
         function App() {
-            let [counter, setCounter] = React.useState(0); 
+            const [counter, setCounter] = React.useState(0); 
             const onClick = () => {
-                //counter += 1;
-                //how to rerendering: using setCounter
-                setCounter(counter+1); //리렌더링 자동으로 지원
+                setCounter(counter+1);
             }
             return(
                 <div>
