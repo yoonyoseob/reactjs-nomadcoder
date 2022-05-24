@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id ="root"></div>
+</body>
+<script src ='https://unpkg.com/react@17/umd/react.development.js'></script>
+    <script src ='https://unpkg.com/react-dom@17/umd/react-dom.development.js'></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src ="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+    <script type="text/babel">
+        function Btn({text, changeValue}){
+            return (
+            <button onClick={changeValue} // 내가 props들을 직접 넣는다.
+            style = {{
+                backgroundColor:"tomato",
+                color:"white",
+                padding:"10px 20px",
+                border: 0,
+                borderRadius: 10,
+            }}>{text}</button>
+            )
+        }   
+        Btn.propTypes = {
+            text:PropTypes.string,
+            fontSize: PropTypes.number,
+        }
+        function App() {
+            const [value,setValue] = React.useState("Save Changes");
+            const changeValue = () => setValue("Revert Changes");
+
+            return(
+                <div>
+                    <Btn changeValue={changeValue} text={value}/>
+                    <Btn text={12}/>
+                </div>
+            );
+        }
+        const root = document.getElementById("root");
+        ReactDOM.render(<App />, root); 
+
+    </script>
+</html>
