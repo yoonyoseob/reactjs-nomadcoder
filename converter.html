@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         const root = document.getElementById("root");   
-        function App() {
+        function TimeConverter() {
             const [amount, setAmount] = React.useState(0);
             const [inverted, setInverted] = React.useState(false);
             const onChange = (event) => {
@@ -27,7 +27,7 @@
             }; //입력된 값을 인자로 받아 무조건 반대의 값을 return한다.
             return(
                 <div>
-                    <h1>Minute and Hour Converter</h1>
+                    <h3>TimeConverter</h3>
                     <label htmlFor="minutes-to-hours">Minutes: </label>
                         <input 
                             value={inverted ?amount*60 : amount}
@@ -56,6 +56,69 @@
                     </div>
             )
         }
+        function DistanceConverter(){
+            const [amount, setAmount] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
+            const onChange = (event) => {
+                setAmount(event.target.value); 
+            }
+            const reset = () => {setAmount(0)};
+            const onInvert = () => {
+                reset(); //Inverted 되었을때 기존의 값을 초기화 하기 위해서 사용
+                setInverted((current) => !current)
+            }; //입력된 값을 인자로 받아 무조건 반대의 값을 return한다.
+            
+            return(
+                <div>
+                    <h3>Distance Converter</h3>
+                    <label htmlFor="kilo-to-miles">Kilometer: </label>
+                        <input 
+                            value={inverted ?(amount*1.60934) : amount}
+                            id = "kilo_input" 
+                            placeholder="kilometer" 
+                            type="number"
+                            onChange={onChange}
+                            disabled={inverted === true}
+                            //if inverted가 true이면 이 disabled가 작동된다.
+                            
+                        />
+                    <div>
+                        <label htmlFor="miles-to-kilo">miles: </label>
+                        <input 
+                            value = {inverted ? amount: (amount*0.6213)} // 삼항연산자를 사용해서 표현하는 값을 조절한다.
+                            id = "mile_input"
+                            placeholder="Hours"
+                            type="number"
+                            onChange={onChange}
+                            disabled={inverted === false} 
+                            //if inverted가 false이면 이 disabled가 작동된다.
+                        />
+                    </div>
+                    <button onClick={reset}>Reset</button>
+                    <button onClick={onInvert}>{!inverted?'change mode: kilo to mile':'change mode: mile to kilo'}</button>
+                    </div>
+            );
+        }
+        
+        function App() {
+            const[index,setIndex] = React.useState("0"); // useState를 사용해서 인덱스를 만들어 인덱스 값을 이용해서 컴포넌트를 선택할 수 있도록 함
+            const onSelect = (e) => {
+                setIndex(e.target.value); // 우리가 고른 값을 감지해서 인덱스 값으로 인지함
+            }
+            return(
+            <div>
+                <h3>Super Converter</h3>
+                <select value={index} onChange={onSelect}> //컴포넌트 중 하나를 선택하게 해줌
+                    <option value="0">Minutes & Hours</option>    
+                    <option value="1">Km & Miles</option>
+                </select>
+                <hr/>
+                {index==="0"?<TimeConverter/>:null}
+                {index==="1"?<DistanceConverter/>:null}
+            </div>
+            );
+        }
+        
         ReactDOM.render(<App />, root); 
 
     </script>
